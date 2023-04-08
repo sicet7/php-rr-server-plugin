@@ -1,0 +1,27 @@
+{
+    "name": "sicet7/php-rr-server",
+    "description": "Setup for RoadRunner HTTP PSR-7 Server",
+    "type": "library",
+    "require": {
+        "php": ">=8.2",
+        "psr/http-server-handler": "^1.0",
+        "psr/event-dispatcher": "^1.0",
+        "psr/log": "^3.0",
+        "spiral/roadrunner": "^2.12",
+        "psr/container": "^2.0",
+        "php-di/php-di": "^7.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sicet7\\Server\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martin René Sørensen",
+            "email": "git@sicet7.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
