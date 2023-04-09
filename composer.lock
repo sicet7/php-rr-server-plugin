@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17249b5da56211d0ee7510725919e61d",
+    "content-hash": "2ad4be166981eda16709234273b8562e",
     "packages": [
         {
             "name": "composer/semver",
@@ -594,17 +594,17 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
-            "name": "sicet7/php-container-base",
+            "name": "sicet7/php-plugin-container",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sicet7/php-container-base.git",
-                "reference": "f55e26eff1084ba08dc2601f245ef7c780acaced"
+                "url": "https://github.com/sicet7/php-plugin-container.git",
+                "reference": "cb744e406ed3d9eb3d1395c6f4d91647996d234d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sicet7/php-container-base/zipball/f55e26eff1084ba08dc2601f245ef7c780acaced",
-                "reference": "f55e26eff1084ba08dc2601f245ef7c780acaced",
+                "url": "https://api.github.com/repos/sicet7/php-plugin-container/zipball/cb744e406ed3d9eb3d1395c6f4d91647996d234d",
+                "reference": "cb744e406ed3d9eb3d1395c6f4d91647996d234d",
                 "shasum": ""
             },
             "require": {
@@ -615,7 +615,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Sicet7\\Container\\Base\\": "src/"
+                    "Sicet7\\Plugin\\Container\\": "src/"
                 }
             },
             "license": [
@@ -629,10 +629,10 @@
             ],
             "description": "PSR-11 container base",
             "support": {
-                "source": "https://github.com/sicet7/php-container-base/tree/master",
-                "issues": "https://github.com/sicet7/php-container-base/issues"
+                "source": "https://github.com/sicet7/php-plugin-container/tree/master",
+                "issues": "https://github.com/sicet7/php-plugin-container/issues"
             },
-            "time": "2023-04-09T12:06:27+00:00"
+            "time": "2023-04-09T12:43:35+00:00"
         },
         {
             "name": "spiral/core",
@@ -2200,7 +2200,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sicet7/php-container-base": 20
+        "sicet7/php-plugin-container": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

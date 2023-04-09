@@ -14,7 +14,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Sicet7\Container\Base\Interfaces\PluginInterface;
+use Sicet7\Plugin\Container\Interfaces\PluginInterface;
 use Spiral\Goridge\Relay;
 use Spiral\Goridge\RelayInterface;
 use Spiral\Goridge\RPC\RPC;

@@ -8,9 +8,9 @@
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
         "spiral/roadrunner": "^2.12",
-        "sicet7/php-container-base": "dev-master",
         "php-di/php-di": "^7.0",
-        "psr/container": "^2.0"
+        "psr/container": "^2.0",
+        "sicet7/php-plugin-container": "dev-master"
     },
     "license": "MIT",
     "autoload": {
@@ -27,7 +27,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/sicet7/php-container-base.git"
+            "url": "git@github.com:sicet7/php-plugin-container.git"
         }
     ],
     "minimum-stability": "stable"
