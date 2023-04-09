@@ -18,6 +18,7 @@ use Spiral\RoadRunner\EnvironmentInterface;
 use Spiral\RoadRunner\Http\PSR7WorkerInterface;
 use Spiral\RoadRunner\Worker as RoadRunnerWorker;
 use Spiral\RoadRunner\Http\PSR7Worker;
+use Spiral\RoadRunner\WorkerInterface;
 
 final class ServerPlugin implements PluginInterface
 {
@@ -61,6 +62,7 @@ final class ServerPlugin implements PluginInterface
                 return new RoadRunnerWorker($relay, $workerParams->interceptSideEffects);
             }
         );
+        $source->reference(WorkerInterface::class, RoadRunnerWorker::class);
         $source->autowire(PSR7Worker::class, PSR7Worker::class);
         $source->reference(PSR7WorkerInterface::class, PSR7Worker::class);
         $source->factory(
