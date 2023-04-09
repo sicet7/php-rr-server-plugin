@@ -1,6 +1,6 @@
 {
-    "name": "sicet7/php-rr-server",
-    "description": "Setup for RoadRunner HTTP PSR-7 Server",
+    "name": "sicet7/php-rr-server-plugin",
+    "description": "Container plugin for a RoadRunner HTTP PSR-7 server setup",
     "type": "library",
     "require": {
         "php": ">=8.2",
