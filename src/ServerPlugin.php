@@ -2,19 +2,13 @@
 
 namespace Sicet7\Server;
 
-use DI\Definition\FactoryDefinition;
-use DI\Definition\ObjectDefinition;
-use DI\Definition\Reference;
-use DI\Definition\Source\MutableDefinitionSource;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ServerRequestFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Sicet7\Plugin\Container\Interfaces\PluginInterface;
+use Sicet7\Plugin\Container\MutableDefinitionSourceHelper;
 use Spiral\Goridge\Relay;
 use Spiral\Goridge\RelayInterface;
 use Spiral\Goridge\RPC\RPC;
@@ -28,43 +22,37 @@ use Spiral\RoadRunner\Http\PSR7Worker;
 final class ServerPlugin implements PluginInterface
 {
     /**
-     * @param MutableDefinitionSource $source
+     * @param MutableDefinitionSourceHelper $source
      * @return void
      */
-    public function register(MutableDefinitionSource $source): void
+    public function register(MutableDefinitionSourceHelper $source): void
     {
-        $source->addDefinition(new ObjectDefinition(
-            WorkerParams::class,
-            WorkerParams::class
-        ));
-        $source->addDefinition(new FactoryDefinition(
+        $source->object(WorkerParams::class, WorkerParams::class);
+        $source->factory(
             Environment::class,
             function (): Environment
             {
                 return Environment::fromGlobals();
             }
-        ));
-        $source->addDefinition($this->makeReference(
-            EnvironmentInterface::class,
-            Environment::class
-        ));
-        $source->addDefinition(new FactoryDefinition(
+        );
+        $source->reference(EnvironmentInterface::class, Environment::class);
+        $source->factory(
             RelayInterface::class,
             function (
                 EnvironmentInterface $environment
             ): RelayInterface {
                 return Relay::create($environment->getRelayAddress());
             }
-        ));
-        $source->addDefinition(new FactoryDefinition(
+        );
+        $source->factory(
             RPCInterface::class,
             function (
                 EnvironmentInterface $environment
             ): RPCInterface {
                 return RPC::create($environment->getRPCAddress());
             }
-        ));
-        $source->addDefinition(new FactoryDefinition(
+        );
+        $source->factory(
             RoadRunnerWorker::class,
             function (
                 RelayInterface $relay,
@@ -72,17 +60,10 @@ final class ServerPlugin implements PluginInterface
             ): RoadRunnerWorker {
                 return new RoadRunnerWorker($relay, $workerParams->interceptSideEffects);
             }
-        ));
-        $PSR7WorkerObjectDefinition = new ObjectDefinition(PSR7Worker::class, PSR7Worker::class);
-        $PSR7WorkerObjectDefinition->setConstructorInjection(ObjectDefinition\MethodInjection::constructor([
-            new Reference(RoadRunnerWorker::class),
-            new Reference(ServerRequestFactoryInterface::class),
-            new Reference(StreamFactoryInterface::class),
-            new Reference(UploadedFileFactoryInterface::class)
-        ]));
-        $source->addDefinition($PSR7WorkerObjectDefinition);
-        $source->addDefinition($this->makeReference(PSR7WorkerInterface::class, PSR7Worker::class));
-        $source->addDefinition(new FactoryDefinition(
+        );
+        $source->autowire(PSR7Worker::class, PSR7Worker::class);
+        $source->reference(PSR7WorkerInterface::class, PSR7Worker::class);
+        $source->factory(
             HttpWorker::class,
             function(
                 RequestHandlerInterface $requestHandler,
@@ -106,18 +87,6 @@ final class ServerPlugin implements PluginInterface
                     $eventDispatcher
                 );
             }
-        ));
-    }
-
-    /**
-     * @param string $name
-     * @param string $target
-     * @return Reference
-     */
-    private function makeReference(string $name, string $target): Reference
-    {
-        $ref = new Reference($target);
-        $ref->setName($name);
-        return $ref;
+        );
     }
 }

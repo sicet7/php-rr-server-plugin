@@ -599,12 +599,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sicet7/php-plugin-container.git",
-                "reference": "cb744e406ed3d9eb3d1395c6f4d91647996d234d"
+                "reference": "0c5dd7a81182058b0cedb0db41df314f3235b005"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sicet7/php-plugin-container/zipball/cb744e406ed3d9eb3d1395c6f4d91647996d234d",
-                "reference": "cb744e406ed3d9eb3d1395c6f4d91647996d234d",
+                "url": "https://api.github.com/repos/sicet7/php-plugin-container/zipball/0c5dd7a81182058b0cedb0db41df314f3235b005",
+                "reference": "0c5dd7a81182058b0cedb0db41df314f3235b005",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
                 "source": "https://github.com/sicet7/php-plugin-container/tree/master",
                 "issues": "https://github.com/sicet7/php-plugin-container/issues"
             },
-            "time": "2023-04-09T12:43:35+00:00"
+            "time": "2023-04-09T22:15:51+00:00"
         },
         {
             "name": "spiral/core",
