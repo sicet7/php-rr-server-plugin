@@ -14,6 +14,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
+use Sicet7\Container\Base\Interfaces\PluginInterface;
 use Spiral\Goridge\Relay;
 use Spiral\Goridge\RelayInterface;
 use Spiral\Goridge\RPC\RPC;
@@ -24,13 +25,13 @@ use Spiral\RoadRunner\Http\PSR7WorkerInterface;
 use Spiral\RoadRunner\Worker as RoadRunnerWorker;
 use Spiral\RoadRunner\Http\PSR7Worker;
 
-final class ServerModule
+final class ServerPlugin implements PluginInterface
 {
     /**
      * @param MutableDefinitionSource $source
      * @return void
      */
-    public static function register(MutableDefinitionSource $source): void
+    public function register(MutableDefinitionSource $source): void
     {
         $source->addDefinition(new ObjectDefinition(
             WorkerParams::class,
@@ -43,7 +44,7 @@ final class ServerModule
                 return Environment::fromGlobals();
             }
         ));
-        $source->addDefinition(self::makeReference(
+        $source->addDefinition($this->makeReference(
             EnvironmentInterface::class,
             Environment::class
         ));
@@ -80,7 +81,7 @@ final class ServerModule
             new Reference(UploadedFileFactoryInterface::class)
         ]));
         $source->addDefinition($PSR7WorkerObjectDefinition);
-        $source->addDefinition(self::makeReference(PSR7WorkerInterface::class, PSR7Worker::class));
+        $source->addDefinition($this->makeReference(PSR7WorkerInterface::class, PSR7Worker::class));
         $source->addDefinition(new FactoryDefinition(
             HttpWorker::class,
             function(
@@ -113,7 +114,7 @@ final class ServerModule
      * @param string $target
      * @return Reference
      */
-    private static function makeReference(string $name, string $target): Reference
+    private function makeReference(string $name, string $target): Reference
     {
         $ref = new Reference($target);
         $ref->setName($name);

@@ -9,7 +9,8 @@
         "psr/log": "^3.0",
         "spiral/roadrunner": "^2.12",
         "psr/container": "^2.0",
-        "php-di/php-di": "^7.0"
+        "php-di/php-di": "^7.0",
+        "sicet7/php-container-base": "dev-master"
     },
     "license": "MIT",
     "autoload": {
@@ -21,6 +22,12 @@
         {
             "name": "Martin René Sørensen",
             "email": "git@sicet7.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/sicet7/php-container-base.git"
         }
     ],
     "minimum-stability": "stable"
