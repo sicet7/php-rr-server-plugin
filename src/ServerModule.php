@@ -2,7 +2,10 @@
 
 namespace Sicet7\Server;
 
-use DI\ContainerBuilder as DIContainerBuilder;
+use DI\Definition\FactoryDefinition;
+use DI\Definition\ObjectDefinition;
+use DI\Definition\Reference;
+use DI\Definition\Source\MutableDefinitionSource;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -17,51 +20,70 @@ use Spiral\Goridge\RPC\RPC;
 use Spiral\Goridge\RPC\RPCInterface;
 use Spiral\RoadRunner\Environment;
 use Spiral\RoadRunner\EnvironmentInterface;
-use Spiral\RoadRunner\Http\PSR7Worker;
 use Spiral\RoadRunner\Http\PSR7WorkerInterface;
 use Spiral\RoadRunner\Worker as RoadRunnerWorker;
-use function DI\create;
-use function DI\get;
+use Spiral\RoadRunner\Http\PSR7Worker;
 
-final class ContainerBuilder
+final class ServerModule
 {
     /**
-     * @return array
+     * @param MutableDefinitionSource $source
+     * @return void
      */
-    public static function getDefinitions(): array
+    public static function register(MutableDefinitionSource $source): void
     {
-        return [
-            WorkerParams::class => create(WorkerParams::class),
-            Environment::class => function (): Environment
+        $source->addDefinition(new ObjectDefinition(
+            WorkerParams::class,
+            WorkerParams::class
+        ));
+        $source->addDefinition(new FactoryDefinition(
+            Environment::class,
+            function (): Environment
             {
                 return Environment::fromGlobals();
-            },
-            EnvironmentInterface::class => get(Environment::class),
-            RelayInterface::class => function (
+            }
+        ));
+        $source->addDefinition(self::makeReference(
+            EnvironmentInterface::class,
+            Environment::class
+        ));
+        $source->addDefinition(new FactoryDefinition(
+            RelayInterface::class,
+            function (
                 EnvironmentInterface $environment
             ): RelayInterface {
                 return Relay::create($environment->getRelayAddress());
-            },
-            RPCInterface::class => function (
+            }
+        ));
+        $source->addDefinition(new FactoryDefinition(
+            RPCInterface::class,
+            function (
                 EnvironmentInterface $environment
             ): RPCInterface {
                 return RPC::create($environment->getRPCAddress());
-            },
-            RoadRunnerWorker::class => function (
+            }
+        ));
+        $source->addDefinition(new FactoryDefinition(
+            RoadRunnerWorker::class,
+            function (
                 RelayInterface $relay,
                 WorkerParams $workerParams
             ): RoadRunnerWorker {
                 return new RoadRunnerWorker($relay, $workerParams->interceptSideEffects);
-            },
-            PSR7Worker::class => create(PSR7Worker::class)
-                ->constructor(
-                    get(RoadRunnerWorker::class),
-                    get(ServerRequestFactoryInterface::class),
-                    get(StreamFactoryInterface::class),
-                    get(UploadedFileFactoryInterface::class),
-                ),
-            PSR7WorkerInterface::class => get(PSR7Worker::class),
-            HttpWorker::class => function(
+            }
+        ));
+        $PSR7WorkerObjectDefinition = new ObjectDefinition(PSR7Worker::class, PSR7Worker::class);
+        $PSR7WorkerObjectDefinition->setConstructorInjection(ObjectDefinition\MethodInjection::constructor([
+            new Reference(RoadRunnerWorker::class),
+            new Reference(ServerRequestFactoryInterface::class),
+            new Reference(StreamFactoryInterface::class),
+            new Reference(UploadedFileFactoryInterface::class)
+        ]));
+        $source->addDefinition($PSR7WorkerObjectDefinition);
+        $source->addDefinition(self::makeReference(PSR7WorkerInterface::class, PSR7Worker::class));
+        $source->addDefinition(new FactoryDefinition(
+            HttpWorker::class,
+            function(
                 RequestHandlerInterface $requestHandler,
                 PSR7WorkerInterface $PSR7Worker,
                 ResponseFactoryInterface $responseFactory,
@@ -82,24 +104,19 @@ final class ContainerBuilder
                     $logger,
                     $eventDispatcher
                 );
-            },
-        ];
+            }
+        ));
     }
 
     /**
-     * @param ContainerInterface|null $parentContainer
-     * @return ContainerInterface
-     * @throws \Exception
+     * @param string $name
+     * @param string $target
+     * @return Reference
      */
-    public static function build(ContainerInterface $parentContainer = null): ContainerInterface
+    private static function makeReference(string $name, string $target): Reference
     {
-        $builder = new DIContainerBuilder();
-        $builder->addDefinitions(self::getDefinitions());
-        $builder->useAttributes(false);
-        $builder->useAutowiring(false);
-        if ($parentContainer instanceof ContainerInterface) {
-            $builder->wrapContainer($parentContainer);
-        }
-        return $builder->build();
+        $ref = new Reference($target);
+        $ref->setName($name);
+        return $ref;
     }
 }
