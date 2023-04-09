@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use Sicet7\Server\Events\BadRequest;
 use Sicet7\Server\Events\PostDispatch;
 use Sicet7\Server\Events\PreDispatch;
@@ -32,15 +33,19 @@ final readonly class HttpWorker
                 $request = $this->PSR7Worker->waitRequest();
 
                 if (!($request instanceof ServerRequestInterface)) {
-                    $this->logger?->info('Termination request received');
+                    $this->log(
+                        LogLevel::INFO,
+                        'Termination request received'
+                    );
                     $this->eventDispatcher?->dispatch(new TerminateWorker());
                     break;
                 }
 
             } catch (\Throwable $throwable) {
-                $this->logger?->notice(
+                $this->log(
+                    LogLevel::NOTICE,
                     'Malformed request received!',
-                    $this->throwableToArray($throwable)
+                    $throwable
                 );
                 try {
                     $this->eventDispatcher?->dispatch(new BadRequest($throwable));
@@ -48,8 +53,10 @@ final readonly class HttpWorker
                         $this->responseFactory->createResponse(400, 'Bad Request')
                     );
                 } catch (\Throwable $badRequestException) {
-                    $this->logger?->error('Failed to deliver bad request response, terminating worker.',
-                        $this->throwableToArray($badRequestException)
+                    $this->log(
+                        LogLevel::ERROR,
+                        'Failed to deliver bad request response, terminating worker.',
+                        $badRequestException
                     );
                     break;
                 }
@@ -63,23 +70,44 @@ final readonly class HttpWorker
                 $this->PSR7Worker->respond($response);
             } catch (\Throwable $throwable) {
                 try {
-                    $this->logger?->error(
+                    $this->log(
+                        LogLevel::ERROR,
                         'Request handler threw unhandled exception!',
-                        $this->throwableToArray($throwable)
+                        $throwable
                     );
                     $this->eventDispatcher?->dispatch(new UnhandledException($throwable));
                     $this->PSR7Worker->respond(
                         $this->responseFactory->createResponse(500, 'Internal Server Error')
                     );
                 } catch (\Throwable $internalServerError) {
-                    $this->logger?->error('Failed to deliver internal server error response, terminating worker.',
-                        $this->throwableToArray($internalServerError)
+                    $this->log(
+                        LogLevel::ERROR,
+                        'Failed to deliver internal server error response, terminating worker.',
+                        $internalServerError
                     );
                     break;
                 }
             }
 
         } while(true);
+    }
+
+    /**
+     * @param string $level
+     * @param string $msg
+     * @param \Throwable|null $throwable
+     * @return void
+     */
+    private function log(string $level, string $msg, ?\Throwable $throwable = null): void
+    {
+        if ($this->logger === null) {
+            return;
+        }
+        $context = [];
+        if ($throwable !== null) {
+            $context['throwable'] = $this->throwableToArray($throwable);
+        }
+        $this->logger->log($level, $msg, $context);
     }
 
     /**
