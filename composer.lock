@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ad4be166981eda16709234273b8562e",
+    "content-hash": "e8ba476e47a5f421b913bb9bfa8cdb26",
     "packages": [
         {
             "name": "composer/semver",
@@ -380,21 +380,21 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
+                "reference": "e616d01114759c4c489f93b099585439f795fe35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -414,7 +414,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interfaces for PSR-7 HTTP message factories",
@@ -429,9 +429,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
+                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
             },
-            "time": "2019-04-30T12:38:16+00:00"
+            "time": "2023-04-10T20:10:41+00:00"
         },
         {
             "name": "psr/http-message",
@@ -488,21 +488,21 @@
         },
         {
             "name": "psr/http-server-handler",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-server-handler.git",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7"
+                "reference": "84c4fb66179be4caaf8e97bd239203245302e7d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
+                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/84c4fb66179be4caaf8e97bd239203245302e7d4",
+                "reference": "84c4fb66179be4caaf8e97bd239203245302e7d4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -522,7 +522,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP server-side request handler",
@@ -538,10 +538,9 @@
                 "server"
             ],
             "support": {
-                "issues": "https://github.com/php-fig/http-server-handler/issues",
-                "source": "https://github.com/php-fig/http-server-handler/tree/master"
+                "source": "https://github.com/php-fig/http-server-handler/tree/1.0.2"
             },
-            "time": "2018-10-30T16:46:14+00:00"
+            "time": "2023-04-10T20:06:20+00:00"
         },
         {
             "name": "psr/log",
@@ -599,12 +598,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sicet7/php-plugin-container.git",
-                "reference": "0c5dd7a81182058b0cedb0db41df314f3235b005"
+                "reference": "816a85ebad7e6631eca57902c7a90a3024781d61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sicet7/php-plugin-container/zipball/0c5dd7a81182058b0cedb0db41df314f3235b005",
-                "reference": "0c5dd7a81182058b0cedb0db41df314f3235b005",
+                "url": "https://api.github.com/repos/sicet7/php-plugin-container/zipball/816a85ebad7e6631eca57902c7a90a3024781d61",
+                "reference": "816a85ebad7e6631eca57902c7a90a3024781d61",
                 "shasum": ""
             },
             "require": {
@@ -632,30 +631,33 @@
                 "source": "https://github.com/sicet7/php-plugin-container/tree/master",
                 "issues": "https://github.com/sicet7/php-plugin-container/issues"
             },
-            "time": "2023-04-09T22:15:51+00:00"
+            "time": "2023-04-14T18:12:20+00:00"
         },
         {
             "name": "spiral/core",
-            "version": "3.6.1",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/core.git",
-                "reference": "dffbc4e7b326004376545aac39161dcfddb57281"
+                "reference": "32a3b81984e466c0f6ce34dd5241da7aec3663f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/core/zipball/dffbc4e7b326004376545aac39161dcfddb57281",
-                "reference": "dffbc4e7b326004376545aac39161dcfddb57281",
+                "url": "https://api.github.com/repos/spiral/core/zipball/32a3b81984e466c0f6ce34dd5241da7aec3663f7",
+                "reference": "32a3b81984e466c0f6ce34dd5241da7aec3663f7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
                 "psr/container": "^1.1|^2.0"
             },
+            "provide": {
+                "psr/container-implementation": "^1.1|^2.0"
+            },
             "require-dev": {
                 "mockery/mockery": "^1.5",
                 "phpunit/phpunit": "^9.5.20",
-                "vimeo/psalm": "^5.6"
+                "vimeo/psalm": "^5.9"
             },
             "type": "library",
             "extra": {
@@ -696,7 +698,7 @@
                 "issues": "https://github.com/spiral/framework/issues",
                 "source": "https://github.com/spiral/core"
             },
-            "time": "2023-02-19T07:31:17+00:00"
+            "time": "2023-04-13T16:14:13+00:00"
         },
         {
             "name": "spiral/goridge",
@@ -762,27 +764,27 @@
         },
         {
             "name": "spiral/logger",
-            "version": "3.6.1",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/logger.git",
-                "reference": "9fca2309638c9eb90888b1f7ddf2298d90769dd1"
+                "reference": "d39ab9978e7ec74ac028857731242c5296c608fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/logger/zipball/9fca2309638c9eb90888b1f7ddf2298d90769dd1",
-                "reference": "9fca2309638c9eb90888b1f7ddf2298d90769dd1",
+                "url": "https://api.github.com/repos/spiral/logger/zipball/d39ab9978e7ec74ac028857731242c5296c608fe",
+                "reference": "d39ab9978e7ec74ac028857731242c5296c608fe",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
                 "psr/log": "1 - 3",
-                "spiral/core": "^3.6.1"
+                "spiral/core": "^3.7"
             },
             "require-dev": {
                 "mockery/mockery": "^1.5",
                 "phpunit/phpunit": "^9.5.20",
-                "vimeo/psalm": "^4.27"
+                "vimeo/psalm": "^5.9"
             },
             "type": "library",
             "extra": {
@@ -823,7 +825,7 @@
                 "issues": "https://github.com/spiral/framework/issues",
                 "source": "https://github.com/spiral/logger"
             },
-            "time": "2023-02-20T15:47:39+00:00"
+            "time": "2023-04-13T16:14:30+00:00"
         },
         {
             "name": "spiral/roadrunner",
@@ -1074,31 +1076,31 @@
         },
         {
             "name": "spiral/tokenizer",
-            "version": "3.6.1",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/tokenizer.git",
-                "reference": "1920f0a9d0d78de3dee8c8b9ef6a68b0724c830e"
+                "reference": "aec4f4b4072fd230c1132140e22c83b85701c057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/tokenizer/zipball/1920f0a9d0d78de3dee8c8b9ef6a68b0724c830e",
-                "reference": "1920f0a9d0d78de3dee8c8b9ef6a68b0724c830e",
+                "url": "https://api.github.com/repos/spiral/tokenizer/zipball/aec4f4b4072fd230c1132140e22c83b85701c057",
+                "reference": "aec4f4b4072fd230c1132140e22c83b85701c057",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "php": ">=8.1",
-                "spiral/core": "^3.6.1",
-                "spiral/logger": "^3.6.1",
+                "spiral/core": "^3.7",
+                "spiral/logger": "^3.7",
                 "symfony/finder": "^5.3.7|^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5.20",
                 "spiral/attributes": "^2.8|^3.0",
-                "spiral/boot": "^3.6.1",
-                "spiral/files": "^3.6.1",
-                "vimeo/psalm": "^4.27"
+                "spiral/boot": "^3.7",
+                "spiral/files": "^3.7",
+                "vimeo/psalm": "^5.9"
             },
             "type": "library",
             "extra": {
@@ -1139,7 +1141,7 @@
                 "issues": "https://github.com/spiral/framework/issues",
                 "source": "https://github.com/spiral/tokenizer"
             },
-            "time": "2023-02-20T15:49:04+00:00"
+            "time": "2023-04-13T16:27:52+00:00"
         },
         {
             "name": "symfony/console",
@@ -1370,16 +1372,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v6.2.8",
+            "version": "v6.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "66391ba3a8862c560e1d9134c96d9bd2a619b477"
+                "reference": "7daf5d24c21a683164688b95bb73b7a4bd3b32fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/66391ba3a8862c560e1d9134c96d9bd2a619b477",
-                "reference": "66391ba3a8862c560e1d9134c96d9bd2a619b477",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/7daf5d24c21a683164688b95bb73b7a4bd3b32fc",
+                "reference": "7daf5d24c21a683164688b95bb73b7a4bd3b32fc",
                 "shasum": ""
             },
             "require": {
@@ -1438,7 +1440,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v6.2.8"
+                "source": "https://github.com/symfony/http-client/tree/v6.2.9"
             },
             "funding": [
                 {
@@ -1454,7 +1456,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-31T09:14:44+00:00"
+            "time": "2023-04-11T16:03:19+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -2205,7 +2207,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-zip": "*",
+        "ext-sockets": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
