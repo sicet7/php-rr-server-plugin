@@ -10,10 +10,10 @@
         "psr/http-server-handler": "^1.0",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
-        "spiral/roadrunner": "^2.12",
         "php-di/php-di": "^7.0",
         "psr/container": "^2.0",
-        "sicet7/php-plugin-container": "dev-master"
+        "sicet7/php-plugin-container": "dev-master",
+        "spiral/roadrunner-http": "^3.0"
     },
     "license": "MIT",
     "autoload": {
